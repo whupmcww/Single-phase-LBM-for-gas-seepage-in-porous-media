@@ -38,5 +38,7 @@ Something newly added:
 ```
 
 ## Case explanation
-2D porous figure
-![porosity = 0.5](fig/porous_2D_0.5.png)
+Complex porous pressure and velocity cloud map
+<p align="center">
+    <img width="300" alt="Pressure" src="porous_kn_results/Directionality/p_norm_622.png"> <img width="300" alt="Velocity" src="porous_kn_results/Directionality/u_norm_622.png"> <img width="300" alt="Permeability" src="porous_kn_results/Directionality/k_622000.png">
+</p>
