@@ -1,4 +1,5 @@
 # Custom imports
+# If the user-defined case.py has been added to the folder app, import here
 from lbm.src.core.factory   import *
 from lbm.src.app.huayi import *
 from lbm.src.app.poiseuille import *
@@ -17,6 +18,7 @@ from lbm.src.app.porous_kn_1 import *
 app_factory = factory()
 
 # Register apps
+# Keywords for user-defined case.py
 
 app_factory.register("huayi",    huayi)
 app_factory.register("poiseuille",    poiseuille)
