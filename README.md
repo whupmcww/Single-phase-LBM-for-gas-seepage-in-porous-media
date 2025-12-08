@@ -22,7 +22,7 @@ Cases implementations include:
 - Complex porous media with slip effect (porous_kn.py)
 - Comparison with microfluidic experiments (porous_kn_1.py)
 
-**Some algorithmic innovations**
+**Innovations**
 
 1.We proposed an innovative method for obstacle placement and boundary condition configuration (lattice_obstacle_addForce.py, obstacle_ww.py)
 
@@ -49,6 +49,13 @@ Cases implementations include:
 - __*outputs*__, __*judge_kError*__ and __*cacu_kError*__ in **Every_case.py** (such as porous_kn.py)
 - __*check_stop*__ in **Base.py**
 - __*cacu_k*__ in **lattice_obstacle_addForce.py**
+
+5.Added several functions suitable for this research, such as special pore structure generation, microfluidic chip replication and output functions
+
+ Main modifications include:
+- **straight.py** and **wanqu.py** in folder **ts_gen**
+- **Fig_chuli.py** and **Fig_read.py** in folder **mfchip_rep**
+- __*export_g*__, __*export_poro_flux*__ and __*export_k_as_csv*__ in **plot.py**
 
 ## Code architecture
 - Program entry (start.py, run.py)
