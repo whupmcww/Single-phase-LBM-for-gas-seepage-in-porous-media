@@ -68,8 +68,10 @@ void Porous2D::Generation(int* s)
 			printf("%d\n", it);
 			printf("%f\n", phi_p);
 		}
+	/// Generate according to the target porosity	
 	//}while (phi_p > phi);
 	//printf("%d\n", it);
+	/// Generate according to the number of iterations
 	}while (it < 1000);
 	
 
@@ -1261,3 +1263,4 @@ void Porous2D::InfectFluid(int i, int j)
 		}
 	}
 }
+
