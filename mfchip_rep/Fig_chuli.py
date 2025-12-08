@@ -21,4 +21,4 @@ def image_to_binary_txt(image_path, output_txt):
         for value in binary_array.flatten():
             f.write(f"{value}\n")
 
-image_to_binary_txt('test2.png', 'output2.txt')
+image_to_binary_txt('test2.jpg', 'output2.txt')
