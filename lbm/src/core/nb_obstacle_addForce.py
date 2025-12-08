@@ -470,7 +470,7 @@ def nb_bounce_back_obstacle_ww(boundary, ns, sc,
         g[qb,i,j] = g_up[q,ii,jj]
 
 ### ************************************************
-### Obstacle halfway bounce-back no-slip b.c. by ww(考虑镜面反射与反弹格式组合)
+### Obstacle halfway bounce-back no-slip b.c. by ww(Combination of specular reflection and rebound formats)
 @njit(parallel=True,cache=True,nogil=True)
 def nb_bounce_back_obstacle_kn_ww(boundary, g, g_up, r):
     
@@ -479,7 +479,7 @@ def nb_bounce_back_obstacle_kn_ww(boundary, g, g_up, r):
         j  = boundary[k,1]
         q  = boundary[k,2]
         
-        if q == 1: #q 编号与方位相反
+        if q == 1: # q is opposite to orientation
             g[2,i,j]=g_up[1,i+1,j]
             g[7,i,j]= (r*g_up[8,i+1,j] + (1-r)*(g_up[5,i+1,j]))
             g[6,i,j]= (r*g_up[5,i+1,j] + (1-r)*(g_up[8,i+1,j]))
