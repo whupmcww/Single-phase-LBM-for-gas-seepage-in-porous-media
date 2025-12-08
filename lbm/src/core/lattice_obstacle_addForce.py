@@ -272,7 +272,7 @@ class lattice:
     ### Computer Permeability
     def cacu_k(self, it):
         out = self.lx
-        ux = self.u[0,out, :] #入口速度
+        ux = self.u[0,out, :] # Inlet velocity
         rho_inlet = self.rho[0,:]
         rho_outlet = self.rho[out,:]
         
@@ -342,7 +342,7 @@ class lattice:
                                 self.g_up, self.g, self.u, self.lattice)
         
     ### ************************************************
-    ### Obstacle halfway bounce-back no-slip b.c. by ww(考虑镜面反射与反弹格式组合)
+    ### Obstacle halfway bounce-back no-slip b.c. by ww(Combination of specular reflection and rebound formats)
     def bounce_back_obstacle_kn_ww(self, obstacle):
 
         nb_bounce_back_obstacle_kn_ww(obstacle.boundary,
@@ -666,44 +666,44 @@ class lattice:
 
     ##############################################
     def add_obstacle_2(self, in_dat):
-        # 使用向量化操作处理障碍物
+        # Binary marking of obstacle elements
         obs_mask = (in_dat != 0)
         self.lattice[obs_mask] = 1.0
         
-        # 获取所有障碍物坐标 (i,j)
+        # Obtain the coordinates (i,j) of obstacle elements
         i_coords, j_coords = np.where(obs_mask)
         obs = np.column_stack((i_coords, j_coords))
         print(f'# {len(obs)} locations in obstacle')
 
-        # 预分配边界数组 (估计最大可能大小)
-        max_possible_bnd = len(obs) * 8  # 每个障碍物最多8个边界点
+        # Allocated boundary elements array (estimated maximum size)
+        max_possible_bnd = len(obs) * 8  # Directions of obstacle elements
         bnd_list = np.empty((max_possible_bnd, 3), dtype=int)
         bnd_count = 0
 
-        # 使用向量化操作处理边界点
+        # Search for non-obstacle elements around obstacle elements
         for q in range(1, 9):
             cx, cy = self.c[q, 0], self.c[q, 1]
             qb = self.ns[q]
             
-            # 计算所有可能的边界点
+            # Coordinates of adjacent elements
             ii = obs[:, 0] + cx
             jj = obs[:, 1] + cy
             
-            # 筛选有效边界点
+            # Filter effective elements
             valid_mask = (ii >= 0) & (ii < self.nx) & (jj >= 0) & (jj < self.ny)
             ii_valid = ii[valid_mask]
             jj_valid = jj[valid_mask]
             
-            # 检查这些点是否是非障碍物
+            # Check if these elements are non-obstacles
             for i, j in zip(ii_valid, jj_valid):
                 if not self.lattice[i, j]:
                     bnd_list[bnd_count] = [i, j, qb]
                     bnd_count += 1
 
-        # 裁剪并去重
+        # Remove duplicate entries
         bnd = np.unique(bnd_list[:bnd_count], axis=0)
 
-        # 计算面积 (向量化计算)
+        # Calculate obstacles area
         area = np.sum(self.lattice) * self.dx**2
 
         return obs, bnd, area
