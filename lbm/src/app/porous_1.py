@@ -18,12 +18,12 @@ class porous_1(base_app):
         self.L_real      = 1.0e-2
         self.L_lbm       = 1000
         self.Re_lbm      = 0.1
-        self.t_max       = 1.0 #实际计算时间
-        self.nu_real     = 1.06e-4 #实际流体黏度
+        self.t_max       = 1.0 # Real cacu time
+        self.nu_real     = 1.06e-4 # Real fluid viscosity
         self.ny          = self.L_lbm 
         self.dy          = 1.0
-        self.rho_lbm     = 1.0 #LBM密度
-        self.rho_real    = 1.0e3 #实际密度
+        self.rho_lbm     = 1.0 # LBM density
+        self.rho_real    = 1.0e3 # Real density
         self.Cs_real     = 1483
         self.tau_lbm     = 0.93
         
@@ -42,7 +42,7 @@ class porous_1(base_app):
         self.compute_lbm_parameters()
 
         # Obstacles
-        self.filepath = 'G:/LBM/para_test/sample/渗透率测试/kuozhan/'
+        self.filepath = 'G:/LBM/para_test/sample/k_test/kuozhan/'
         self.filename = self.filepath +'100_100_0.5_0.01_0.1_0.01_0.025_10x10'+'.txt'
         self.obstacle_ww =  obstacle('users_define')
 
@@ -90,10 +90,10 @@ class porous_1(base_app):
         val  = it
         ret  = (1.0 - math.exp(-val**2/(2.0*self.sigma**2)))
 
-        ##############速度入口
+        ############## Velocity inlet
         #lattice.u_left[0,:] = ret*self.u_lbm
         #lattice.u_left[1,:] = 0.0
-        ##############压力入口
+        ############## Pressure inlet
         self.p_left = 10.0e6
         lattice.rho_left[:] = self.p_left / (self.rho_real*self.Cs_real**2) /1000.0 + self.rho_lbm
         #lattice.p_left[:] = lattice.rho_left[:] * self.Cs**2
@@ -114,9 +114,9 @@ class porous_1(base_app):
         # Wall BCs
         lattice.zou_he_bottom_wall_velocity()
 
-        ###############速度入口
+        ############### Velocity inlet
         #lattice.zou_he_left_wall_velocity()
-        ###############压力入口
+        ############### Pressure inlet
         lattice.zou_he_left_wall_pressure()
 
         lattice.zou_he_top_wall_velocity()
