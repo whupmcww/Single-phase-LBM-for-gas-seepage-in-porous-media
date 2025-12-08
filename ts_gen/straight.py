@@ -6,27 +6,27 @@ width=10
 spacing=30
 
 def generate_straight_channels(size, width, spacing):
-    """生成垂直直流道，确保所有流道完整包含在网格内"""
+    """Generate vertical straight channels and ensure fully contained within the range"""
     grid = np.ones((size, size))
     
-    # 计算实际可容纳的流道数量
+    # Calculate the number of flow channels that can be accommodated
     channel_count = (size - width) // spacing
-    start_pos = (size - (channel_count * spacing + width)) // 2  # 居中
+    start_pos = (size - (channel_count * spacing + width)) // 2  # Start position
     
-    # 生成流道
+    # Generate flow channels
     for i in range(start_pos+ spacing//2, size, spacing):
         if i + width > size:
             break
         grid[:, i:i+width] = 0
     
-    # 强制边界为障碍
+    # Enforce boundaries as obstacles
     #grid[0, :] = 1; grid[-1, :] = 1; grid[:, 0] = 1; grid[:, -1] = 1
     return grid
 
 straight_grid = generate_straight_channels(size, width, spacing)
 #straight_grid = np.rot90(straight_grid)
 
-#添加边界层
+# Add inlet and output transition layers
 zeros_row = np.zeros((5,size))
 straight_grid = np.vstack([zeros_row,straight_grid,zeros_row])
 straight_grid = np.rot90(straight_grid)
@@ -42,8 +42,8 @@ plt.axis('off')
 plt.savefig(filename+'_rot90'+'.png', dpi=300 ,bbox_inches='tight', pad_inches=0)
 #plt.show()
 
-# 展平矩阵（按行优先）
+# Flattening matrix (row priority)
 flat_straight = straight_grid.flatten()
 
-# 保存为单列 txt 文件
-np.savetxt(filename+'_rot90'+'.txt', flat_straight, fmt="%d")  # %d 表示整数格式
+# Save as txt file
+np.savetxt(filename+'_rot90'+'.txt', flat_straight, fmt="%d") 
