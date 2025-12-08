@@ -218,16 +218,13 @@ def plot_outlet_velocity_curve(lattice, dpi, it):
     with open(filename1, mode='w', newline='') as file:
         writer = csv.writer(file)
     
-    # 写入表头
         # writer.writerow(['x', 'y'])
-    
-    # 写入文件
         # for x1, y1, y2 in zip(y, ux, valid_ux):
         #     writer.writerow([x1, y1, y2])
         for x1, y1 in zip(ux, y):
               writer.writerow([x1, y1])
 
-    print("CSV文件已成功写入")
+    print("CSV file successfully written")
 
 ################################################
 def plot_outlet_pressure_curve(lattice, dpi, it):
@@ -257,12 +254,10 @@ def plot_outlet_pressure_curve(lattice, dpi, it):
     filename1 = lattice.png_dir+'p'+str(lattice.u_lbm)+'_'+str(it)+'_'+'.csv'
     with open(filename1, mode='w', newline='') as file:
         writer = csv.writer(file)
-    
-    # 写入文件
         for x1, y1 in zip(x, rho):
             writer.writerow([x1, y1])
 
-    print("CSV文件已成功写入")
+    print("CSV file successfully written")
 
 ################################################
 def plot_cavity_validation(lattice, dpi, it):
@@ -304,15 +299,12 @@ def plot_cavity_validation(lattice, dpi, it):
     filename1 = lattice.png_dir+'u_out'+str(lattice.u_lbm)+'_'+str(it)+'_'+'.csv'
     with open(filename1, mode='w', newline='') as file:
         writer = csv.writer(file)
-    
-    # 写入表头
+
         # writer.writerow(['x', 'y'])
-    
-    # 写入文件
         for x1, y1, y2 in zip(y, ux_1, valid_ux):
             writer.writerow([x1, y1, y2])
 
-    print("CSV文件已成功写入")
+    print("CSV file successfully written")
 
 ################################################
 def export_g(lattice, it):
@@ -324,13 +316,12 @@ def export_g(lattice, it):
         with open(filename1, mode='w', newline='') as file:
             writer = csv.writer(file)
             
-        # 写入文件
             # for row in transposed_array:
             #     writer.writerow(row)
             for row in lattice.g[i]:
                 writer.writerow(row)
 
-    print("CSV文件已成功写入")
+    print("CSV file successfully writte")
 
 ################################################
 def export_step_velocity(lattice, it):
@@ -346,8 +337,8 @@ def export_step_velocity(lattice, it):
         assert len(y) == len(ux_1) == len(ux_2) == len(ux_3)
 
         data = [
-            ["y", "ux_1", "ux_2", "ux_3"],  # 表头
-            *[list(row) for row in zip(y, ux_1, ux_2, ux_3)]  # 数据行，使用列表推导式将 zip 对象转换为列表
+            ["y", "ux_1", "ux_2", "ux_3"],  # Lables
+            *[list(row) for row in zip(y, ux_1, ux_2, ux_3)]  # Data rows
             ]
 
         filename1 = lattice.output_dir+'v_out'+str(it)+'.csv'
@@ -356,12 +347,12 @@ def export_step_velocity(lattice, it):
                 
             writer.writerows(data)
 
-        print("CSV文件已成功写入")
+        print("CSV file successfully writte")
     
 ###################################################
 def export_poro_flux(lattice, it, cacu_step, output, plot_every):
     # out = math.floor(lattice.lx)
-    # ux = lattice.u[0,out, :].copy() #入口速度
+    # ux = lattice.u[0,out, :].copy() # Inlet velocity
     # rho_inlet = lattice.rho[0,:].copy()
     # rho_outlet = lattice.rho[out,:].copy()
     # y  = np.linspace(0, 1, lattice.ny)
@@ -405,8 +396,8 @@ def export_poro_flux(lattice, it, cacu_step, output, plot_every):
 def export_k_as_csv(lattice, step, output):
 
     data = [
-            ["step", "k"],  # 表头
-            *[list(row) for row in zip(step, output)]  # 数据行，使用列表推导式将 zip 对象转换为列表
+            ["step", "k"],  # Lables
+            *[list(row) for row in zip(step, output)]  # Data rows
             ]
 
     filename = lattice.output_dir+'k_out'+'.csv'
@@ -415,4 +406,4 @@ def export_k_as_csv(lattice, step, output):
                 
         writer.writerows(data)
 
-    print("CSV文件已成功写入")
+    print("CSV file successfully writte")
