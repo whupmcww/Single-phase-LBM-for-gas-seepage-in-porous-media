@@ -4,6 +4,7 @@ import sys
 
 # Custom imports
 from lbm.src.app.app      import *
+#from lbm.src.core.lattice_obatacle_addForce import *
 from lbm.src.core.lattice import *
 from lbm.src.core.run     import *
 
