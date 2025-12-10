@@ -4,8 +4,8 @@ import time
 
 # Custom imports
 from lbm.src.app.app      import *
-#from lbm.src.core.lattice_addForce import *
-from lbm.src.core.lattice_obstacle_addForce import *
+# from lbm.src.core.lattice_addForce import *
+# from lbm.src.core.lattice_obstacle_addForce import *
 
 ########################
 # Run lbm simulation
