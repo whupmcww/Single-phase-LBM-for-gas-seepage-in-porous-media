@@ -44,7 +44,7 @@ def run(lattice, app):
             # Output field
             app.outputs(lattice, it)
 
-            # 判断误差
+            # Judge error for permeability k
             app.judge_kError(it)
 
             # Compute equilibrium state
